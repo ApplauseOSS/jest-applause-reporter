@@ -1,0 +1,30 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: 
+      - master
+  pull_request:
+    types: 
+      - opened
+      - synchronize
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node_version: [14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    #  https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{matrix.node_version}}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{matrix.node_version}}
+        cache: 'yarn'
+    - run: ./scripts/build.sh
