@@ -1,5 +1,5 @@
-import {Config} from 'jest';
-const config: Config = {
+/** @type {import('jest').Config} */
+module.exports = {
     reporters: [
     //     [
     //         './dist/index.js', 
@@ -16,4 +16,3 @@ const config: Config = {
     //     ]
     ]
 };
-export default config;
