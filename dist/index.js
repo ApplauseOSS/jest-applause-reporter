@@ -7,7 +7,10 @@ class ApplauseJestReporter {
     reporter;
     constructor(globalConfig, options) {
         this.globalConfig = globalConfig;
-        this.reporter = new applauseReporterCommon.ApplauseReporter(options);
+        const config = applauseReporterCommon.loadConfig({
+            properties: options,
+        });
+        this.reporter = new applauseReporterCommon.ApplauseReporter(config);
     }
     onRunStart() {
         this.reporter.runnerStart();

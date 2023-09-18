@@ -6,6 +6,7 @@ import {
   ApplauseConfig,
   ApplauseReporter,
   TestResultStatus,
+  loadConfig,
 } from 'applause-reporter-common';
 
 export default class ApplauseJestReporter implements Reporter {
@@ -13,9 +14,12 @@ export default class ApplauseJestReporter implements Reporter {
 
   constructor(
     public globalConfig: Config,
-    options: ApplauseConfig
+    options: Partial<ApplauseConfig>
   ) {
-    this.reporter = new ApplauseReporter(options);
+    const config = loadConfig({
+      properties: options,
+    });
+    this.reporter = new ApplauseReporter(config);
   }
 
   onRunStart(): void {
