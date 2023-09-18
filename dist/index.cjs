@@ -41,4 +41,4 @@ class ApplauseJestReporter {
 }
 
 module.exports = ApplauseJestReporter;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.cjs.map
