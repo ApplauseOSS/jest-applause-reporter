@@ -7,7 +7,7 @@ import { ApplauseConfig } from 'applause-reporter-common';
 declare class ApplauseJestReporter implements Reporter {
     globalConfig: Config;
     private reporter;
-    constructor(globalConfig: Config, options: ApplauseConfig);
+    constructor(globalConfig: Config, options: Partial<ApplauseConfig>);
     onRunStart(): void;
     onRunComplete(): Promise<void>;
     onTestCaseStart(_test: Test, _testCaseStartInfo: Circus.TestCaseStartInfo): void;

@@ -1,11 +1,14 @@
-import { ApplauseReporter, TestResultStatus } from 'applause-reporter-common';
+import { loadConfig, ApplauseReporter, TestResultStatus } from 'applause-reporter-common';
 
 class ApplauseJestReporter {
     globalConfig;
     reporter;
     constructor(globalConfig, options) {
         this.globalConfig = globalConfig;
-        this.reporter = new ApplauseReporter(options);
+        const config = loadConfig({
+            properties: options,
+        });
+        this.reporter = new ApplauseReporter(config);
     }
     onRunStart() {
         this.reporter.runnerStart();
