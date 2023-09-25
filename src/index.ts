@@ -36,14 +36,26 @@ export default class ApplauseJestReporter implements Reporter {
   ): void {
     this.reporter.startTestCase(
       _testCaseStartInfo.fullName,
-      _testCaseStartInfo.title
+      _testCaseStartInfo.title,
+      {
+        providerSessionIds: globalThis.driverRegistry.getSessionIdsForTestCase(
+          _testCaseStartInfo.fullName
+        ),
+      }
     );
   }
 
   onTestCaseResult(_test: Test, _testCaseResult: TestCaseResult): void {
     this.reporter.submitTestCaseResult(
       _testCaseResult.fullName,
-      this.mapStatus(_testCaseResult)
+      this.mapStatus(_testCaseResult),
+      {
+        failureReason: _testCaseResult.failureMessages.join(', '),
+        providerSessionGuids:
+          globalThis.driverRegistry.getSessionIdsForTestCase(
+            _testCaseResult.fullName
+          ),
+      }
     );
   }
 
