@@ -17,10 +17,15 @@ class ApplauseJestReporter {
         await this.reporter.runnerEnd();
     }
     onTestCaseStart(_test, _testCaseStartInfo) {
-        this.reporter.startTestCase(_testCaseStartInfo.fullName, _testCaseStartInfo.title);
+        this.reporter.startTestCase(_testCaseStartInfo.fullName, _testCaseStartInfo.title, {
+            providerSessionIds: globalThis.driverRegistry.getSessionIdsForTestCase(_testCaseStartInfo.fullName),
+        });
     }
     onTestCaseResult(_test, _testCaseResult) {
-        this.reporter.submitTestCaseResult(_testCaseResult.fullName, this.mapStatus(_testCaseResult));
+        this.reporter.submitTestCaseResult(_testCaseResult.fullName, this.mapStatus(_testCaseResult), {
+            failureReason: _testCaseResult.failureMessages.join(', '),
+            providerSessionGuids: globalThis.driverRegistry.getSessionIdsForTestCase(_testCaseResult.fullName),
+        });
     }
     mapStatus(result) {
         switch (result.status) {

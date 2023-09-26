@@ -1,18 +1,21 @@
 /** @type {import('jest').Config} */
 module.exports = {
-    reporters: [
+    preset: 'ts-jest',
+    testEnvironment: 'node',
+    // reporters: [
     //     [
-    //         './dist/index.js', 
+    //         './dist/index.cjs', 
     //         {
-    //             "baseUrl": "https://integration-auto-api.devcloud.applause.com:443/",
     //             "apiKey": "GIVE_ME_A_KEY",
-    //             "productId": 267,
+    //             "productId": 0,
     //             "testRail": {
-    //                 "projectId": 8,
-    //                 "suiteId": 453,
+    //                 "projectId": 0,
+    //                 "suiteId": 0,
     //                 "planName": "Example Plan Name",
     //                 "runName": "Example Run Name"}
     //         }
     //     ]
-    ]
+    // ],
+    // globalSetup: './dist/global-setup.mjs',
+    // globalTeardown: './dist/global-teardown.mjs'
 };
