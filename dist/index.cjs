@@ -13,18 +13,18 @@ class ApplauseJestReporter {
         this.reporter = new applauseReporterCommon.ApplauseReporter(config);
     }
     onRunStart() {
-        this.reporter.runnerStart();
+        void this.reporter.runnerStart();
     }
     async onRunComplete() {
         await this.reporter.runnerEnd();
     }
     onTestCaseStart(_test, _testCaseStartInfo) {
-        this.reporter.startTestCase(_testCaseStartInfo.fullName, _testCaseStartInfo.title, {
+        void this.reporter.startTestCase(_testCaseStartInfo.fullName, _testCaseStartInfo.title, {
             providerSessionIds: globalThis.driverRegistry.getSessionIdsForTestCase(_testCaseStartInfo.fullName),
         });
     }
     onTestCaseResult(_test, _testCaseResult) {
-        this.reporter.submitTestCaseResult(_testCaseResult.fullName, this.mapStatus(_testCaseResult), {
+        void this.reporter.submitTestCaseResult(_testCaseResult.fullName, this.mapStatus(_testCaseResult), {
             failureReason: _testCaseResult.failureMessages.join(', '),
             providerSessionGuids: globalThis.driverRegistry.getSessionIdsForTestCase(_testCaseResult.fullName),
         });
