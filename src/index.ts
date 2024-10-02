@@ -23,7 +23,7 @@ export default class ApplauseJestReporter implements Reporter {
   }
 
   onRunStart(): void {
-    this.reporter.runnerStart();
+    void this.reporter.runnerStart();
   }
 
   async onRunComplete(): Promise<void> {
@@ -34,7 +34,7 @@ export default class ApplauseJestReporter implements Reporter {
     _test: Test,
     _testCaseStartInfo: Circus.TestCaseStartInfo
   ): void {
-    this.reporter.startTestCase(
+    void this.reporter.startTestCase(
       _testCaseStartInfo.fullName,
       _testCaseStartInfo.title,
       {
@@ -46,7 +46,7 @@ export default class ApplauseJestReporter implements Reporter {
   }
 
   onTestCaseResult(_test: Test, _testCaseResult: TestCaseResult): void {
-    this.reporter.submitTestCaseResult(
+    void this.reporter.submitTestCaseResult(
       _testCaseResult.fullName,
       this.mapStatus(_testCaseResult),
       {
