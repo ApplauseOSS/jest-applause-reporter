@@ -36,7 +36,8 @@ let options = [
 			// The dts plugin will handle exporting all types in a single dts file, so we do not need to export the declarations in this case
 			typescript({
 				declaration: false,
-			})
+				declarationDir: 'dist/types',
+			}),
 		]
 	},
 	{
@@ -76,6 +77,7 @@ for (let bundle of ADDITIONAL_BUNDLES) {
 		// The dts plugin will handle exporting all types in a single dts file, so we do not need to export the declarations in this case
 		typescript({
 			declaration: false,
+			declarationDir: 'dist/types',
 		})
 	]
 })
