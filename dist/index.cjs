@@ -23,9 +23,18 @@ class ApplauseJestReporter {
             providerSessionIds: globalThis.driverRegistry.getSessionIdsForTestCase(_testCaseStartInfo.fullName),
         });
     }
+    cleanErrorMessage(str) {
+        // eslint-disable-next-line no-control-regex
+        return str?.replace(/\x1B\[[0-9;]*m/g, '');
+    }
     onTestCaseResult(_test, _testCaseResult) {
+        // 1. Map over the failure messages and clean each one.
+        const cleanedMessages = _testCaseResult.failureMessages.map(msg => this.cleanErrorMessage(msg) || '');
+        // 2. Join the cleaned messages with a newline for better readability.
+        const failureReason = cleanedMessages.join('\n');
         void this.reporter.submitTestCaseResult(_testCaseResult.fullName, this.mapStatus(_testCaseResult), {
-            failureReason: _testCaseResult.failureMessages.join(', '),
+            // 3. Use the fully cleaned and formatted string.
+            failureReason: failureReason,
             providerSessionGuids: globalThis.driverRegistry.getSessionIdsForTestCase(_testCaseResult.fullName),
         });
     }
