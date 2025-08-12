@@ -11,6 +11,7 @@ declare class ApplauseJestReporter implements Reporter {
     onRunStart(): void;
     onRunComplete(): Promise<void>;
     onTestCaseStart(_test: Test, _testCaseStartInfo: Circus.TestCaseStartInfo): void;
+    cleanErrorMessage(str?: string): string | undefined;
     onTestCaseResult(_test: Test, _testCaseResult: TestCaseResult): void;
     private mapStatus;
 }
